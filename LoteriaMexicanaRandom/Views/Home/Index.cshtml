@@ -3,7 +3,7 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Tabla</h1>
+    <h1 class="display-6">Generación de cartones random</h1>
     <table id="table_id" class="display">
         <thead>
             <tr>
@@ -20,12 +20,7 @@
             </tr>
         </tfoot>
     </table>
-</div>
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-codigo="02240543080341381927151031223950">
-    Launch demo modal
-</button>
+</div> 
 
 <partial name="_Carton" />
 
@@ -42,6 +37,21 @@
         $(document).ready(function () {
             $('#table_id').DataTable({
                 "responsive": true,
+                "dom": 'Bfrtip',
+                "buttons": [
+                    {
+                        extend: 'excel',
+                        text: 'Exportar a Excel',
+                        className: 'btn btn-danger',
+                        exportOptions: {
+                            format: {
+                                body: function (data, row, column, node) {
+                                    return ValidaData(data, row, column, node);
+                                }
+                            }
+                        }
+                    }
+                ],
                 "ajax": {
                     "url": "/Home/GetAll",
                     "type": "GET",
@@ -49,6 +59,7 @@
                         d.cantidad = getUrlParameter('cantidad');
                     }
                 },
+                "order": [[2, "desc"]],
                 "columns": [
                     { "data": "item1", "width": "10%" },
                     {
@@ -88,10 +99,8 @@
             });
         });
 
-        $("#exampleModal").on('show.bs.modal', function (event) {
-            // Button that triggered the modal
-            var button = event.relatedTarget;
-            // Extract info from data-bs-* attributes
+        $("#exampleModal").on('show.bs.modal', function (event) { 
+            var button = event.relatedTarget; 
             var codigo = button.getAttribute('data-bs-codigo');
 
             if (codigo != undefined && codigo.length != 32)
@@ -121,6 +130,15 @@
                 }
             }
             return 500;
-        };
+        }; 
+
+        function ValidaData(data, row, column, node) {
+
+            if (data.includes('data-bs-toggle'))
+                data = 'link'; 
+
+            return data;
+        }
+
     </script>
 }
