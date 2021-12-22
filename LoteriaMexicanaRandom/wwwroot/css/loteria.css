@@ -29,7 +29,15 @@
 .modal .tarjeta {
     height: 100px;
 }
+@media (min-width: 390px) {
+    .tarjeta {
+        height: 135px;
+    }
 
+    .modal .tarjeta {
+        height: 120px
+    }
+}
 @media (min-width: 576px) {
     .tarjeta {
         height: 180px;
