@@ -1,25 +1,42 @@
-.modal-content {
+/*.logo-loteria {
+    height: 170px
+}
+.modal .logo-loteria {
+    height: 120px
+}*/
+.modal-content, .pagina {
     background-color: #fb1b23;
     background-image: url(../img/bg.jpg);
     background-position: center top;
-    background-repeat: no-repeat;
     background-size: contain;
+}
+.modal-content, .pagina {
+    background-repeat: no-repeat;
 }
 .border {
     border-color: #333 !important;
 }
-/* .pagina {
-    height: 100vh;
-} */
 .planilla {
     background-color: #fff;
 }
 .tarjeta {
     height: 115px;
     background-size: cover;
-    background-repeat: no-repeat;
     background-position: center;
     border-radius: .3rem;
+}
+
+.modal .tarjeta {
+    height: 100px;
+}
+
+@media (min-width: 576px) {
+    .tarjeta {
+        height: 180px;
+    }
+    .modal .tarjeta {
+        height: 180px
+    }
 }
 
 @media (min-width: 768px) {
@@ -31,6 +48,9 @@
 @media (min-width: 992px) {
     .tarjeta {
         height: 250px;
+    }
+    .modal .tarjeta {
+        height: 200px
     }
 }
 @media (min-width: 1200px) {
