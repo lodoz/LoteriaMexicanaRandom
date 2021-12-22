@@ -20,12 +20,13 @@
             </tr>
         </tfoot>
     </table>
-</div> 
+</div>
 
 <partial name="_Carton" />
 
 @section Scripts {
     <script src="~/js/dTableEs.js"></script>
+    <script src="~/lib/Responsive-2.2.5/js/dataTables.responsive.js"></script>
     <script type="text/javascript">let ls_figuras = [
             'gallo', 'diablito', 'dama', 'catrin', 'paraguas', 'sirena', 'escalera', 'botella', 'barril', 'arbol',
             'melon', 'valiente', 'gorrito', 'muerte', 'pera', 'bandera', 'bandolon', 'violoncello', 'garza', 'pajaro',
@@ -61,7 +62,13 @@
                 },
                 "order": [[2, "desc"]],
                 "columns": [
-                    { "data": "item1", "width": "10%" },
+                    {
+                        "data": "item1",
+                        "render": function (data, type, row, meta) {
+                            return '<a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-codigo="' + data + '">' + data + '</a>';
+                        },
+                        "width": "10%"
+                    },
                     {
                         "data": { id: "item2" },
                         "render": function (data) {
@@ -75,23 +82,23 @@
                             figuras = figuras.substr(0, figuras.length - 1);
 
                             return `
-                                                <div class="text-center">
-                                                        ${figuras}
-                                                </div>`;
+                                                    <div class="text-center">
+                                                            ${figuras}
+                                                    </div>`;
                         }, "width": "85%"
                     },
                     {
                         "data": { id: "item1" },
                         "render": function (data) {
                             return `
-                                <div class="text-center">
-                                    <button type="button" class="btn btn-success text-white" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-codigo="${data.item1}" style="cursor:pointer">
-                                        ver
-                                    </button>
-                                    <a href="/Home/Carton?codigo=${data.item1}" target="_blank" class="btn btn-primary text-white" style="cursor:pointer">
-                                        ver
-                                    </button>
-                                </div>`;
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-success text-white" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-codigo="${data.item1}" style="cursor:pointer">
+                                            ver
+                                        </button>
+                                        <a href="/Home/Carton?codigo=${data.item1}" target="_blank" class="btn btn-primary text-white" style="cursor:pointer">
+                                            ver
+                                        </button>
+                                    </div>`;
                         }, "width": "5%"
                     }
                 ],
@@ -99,8 +106,8 @@
             });
         });
 
-        $("#exampleModal").on('show.bs.modal', function (event) { 
-            var button = event.relatedTarget; 
+        $("#exampleModal").on('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
             var codigo = button.getAttribute('data-bs-codigo');
 
             if (codigo != undefined && codigo.length != 32)
@@ -130,15 +137,13 @@
                 }
             }
             return 500;
-        }; 
+        };
 
         function ValidaData(data, row, column, node) {
 
             if (data.includes('data-bs-toggle'))
-                data = 'link'; 
+                data = 'link';
 
             return data;
-        }
-
-    </script>
+        }</script>
 }
