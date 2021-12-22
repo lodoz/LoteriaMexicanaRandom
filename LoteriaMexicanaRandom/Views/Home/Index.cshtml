@@ -1,0 +1,126 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Tabla</h1>
+    <table id="table_id" class="display">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Figuras</th>
+                <th>Ver</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Codigo</th>
+                <th>Figuras</th>
+                <th>Ver</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-codigo="02240543080341381927151031223950">
+    Launch demo modal
+</button>
+
+<partial name="_Carton" />
+
+@section Scripts {
+    <script src="~/js/dTableEs.js"></script>
+    <script type="text/javascript">let ls_figuras = [
+            'gallo', 'diablito', 'dama', 'catrin', 'paraguas', 'sirena', 'escalera', 'botella', 'barril', 'arbol',
+            'melon', 'valiente', 'gorrito', 'muerte', 'pera', 'bandera', 'bandolon', 'violoncello', 'garza', 'pajaro',
+            'mano', 'bota', 'luna', 'cotorro', 'borracho', 'negrito', 'corazon', 'sandia', 'tambor', 'camaron',
+            'jaras', 'musico', 'arana', 'soldado', 'estrella', 'cazo', 'mundo', 'apache', 'nopal', 'alacran',
+            'rosa', 'calavera', 'campana', 'cantarito', 'venado', 'sol', 'corona', 'chalupa', 'pino', 'pescado',
+            'palma', 'maceta', 'arpa', 'rana'];
+
+        $(document).ready(function () {
+            $('#table_id').DataTable({
+                "responsive": true,
+                "ajax": {
+                    "url": "/Home/GetAll",
+                    "type": "GET",
+                    "data": function (d) {
+                        d.cantidad = getUrlParameter('cantidad');
+                    }
+                },
+                "columns": [
+                    { "data": "item1", "width": "10%" },
+                    {
+                        "data": { id: "item2" },
+                        "render": function (data) {
+                            var parts = data.item2.match(/.{1,2}/g) || [];
+                            var figuras = "";
+
+                            parts.forEach(function (item) {
+                                figuras += ls_figuras[Number(item) - 1] + ' ';
+                            })
+
+                            figuras = figuras.substr(0, figuras.length - 1);
+
+                            return `
+                                                <div class="text-center">
+                                                        ${figuras}
+                                                </div>`;
+                        }, "width": "85%"
+                    },
+                    {
+                        "data": { id: "item1" },
+                        "render": function (data) {
+                            return `
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-success text-white" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-codigo="${data.item1}" style="cursor:pointer">
+                                        ver
+                                    </button>
+                                    <a href="/Home/Carton?codigo=${data.item1}" target="_blank" class="btn btn-primary text-white" style="cursor:pointer">
+                                        ver
+                                    </button>
+                                </div>`;
+                        }, "width": "5%"
+                    }
+                ],
+                "language": espanol
+            });
+        });
+
+        $("#exampleModal").on('show.bs.modal', function (event) {
+            // Button that triggered the modal
+            var button = event.relatedTarget;
+            // Extract info from data-bs-* attributes
+            var codigo = button.getAttribute('data-bs-codigo');
+
+            if (codigo != undefined && codigo.length != 32)
+                return false;
+
+            var parts = codigo.match(/.{1,2}/g) || [];
+            var figuras = "";
+
+            $('#tarjetas').empty();
+            parts.forEach(function (item) {
+                var html = '<div class="col"><div class="tarjeta n' + item + ' border border-2 mb-2 mb-md-3"></div></div>';
+                $('#tarjetas').append(html);
+            })
+        });
+
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = window.location.search.substring(1),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+                }
+            }
+            return 500;
+        };
+    </script>
+}
