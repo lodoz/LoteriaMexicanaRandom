@@ -2,8 +2,21 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center py-5">
-    <h1 class="display-6 fw-bold mb-4">Generación de cartones random</h1>
+<div class="d-flex row mb-4 mt-4 mt-md-5">
+    <div class="col-md-8 text-center text-md-start">
+        <h1 class="display-6 fw-bold ">Generación de cartones random</h1>
+    </div>
+    <div class="col-md-4 text-md-end d-flex align-items-center">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Cantidad" aria-label="Example text with two button addons">
+            <button class="btn btn-stop" type="button">Generar</button>
+        </div>
+    </div>
+    
+    
+</div>
+
+<div class="text-center pb-5">
     <table id="table_id" class="display">
         <thead>
             <tr>
@@ -43,7 +56,7 @@
                     {
                         extend: 'excel',
                         text: 'Exportar a Excel',
-                        className: 'btn btn-danger',
+                        className: 'btn btn-stop',
                         exportOptions: {
                             format: {
                                 body: function (data, row, column, node) {
@@ -92,10 +105,10 @@
                         "render": function (data) {
                             return `
                                     <div class="text-center">
-                                        <button type="button" class="btn btn-success text-white" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-codigo="${data.item1}" style="cursor:pointer">
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-codigo="${data.item1}" style="cursor:pointer">
                                             ver
                                         </button>
-                                        <a href="/Home/Carton?codigo=${data.item1}" target="_blank" class="btn btn-primary text-white" style="cursor:pointer">
+                                        <a href="/Home/Carton?codigo=${data.item1}" target="_blank" class="btn btn-stop" style="cursor:pointer">
                                             ver
                                         </button>
                                     </div>`;

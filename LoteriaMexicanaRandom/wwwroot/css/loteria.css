@@ -1,9 +1,18 @@
-/*.logo-loteria {
-    height: 170px
+.w-25 {
+    width: 25% !important;
 }
-.modal .logo-loteria {
-    height: 120px
-}*/
+.bg-stop {
+    background-color: #fb1b23;
+}
+.btn-stop {
+    background-color: #fb1b23;
+    color: #fff;
+}
+    .btn-stop:hover {
+        color: #fff;
+        background-color: #B40000;
+    }
+
 .modal-content, .pagina {
     background-color: #fb1b23;
     background-image: url(../img/bg.jpg);
