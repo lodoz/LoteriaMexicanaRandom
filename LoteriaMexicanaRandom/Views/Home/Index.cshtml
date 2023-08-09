@@ -136,10 +136,27 @@
 
             $('#tarjetas').empty();
             parts.forEach(function (item) {
-                var html = '<div class="col"><div class="tarjeta n' + item + ' border border-2 mb-2 mb-md-3"></div></div>';
+                var html = '<div class="col"><div class="tarjeta n' + item + ' border border-2 mb-2 mb-md-3"><img src="https://juegalabolita.com/LoteriaMexicanaWeb/content/img/loteria/ticket-azul.png" alt="Check" class="check-overlay"></div></div>';
                 $('#tarjetas').append(html);
             })
         });
+
+        $(document).on("click", ".col", function () {
+            var $tarjeta = $(this);
+            var $overlay = $tarjeta.find('.check-overlay');
+
+            if ($overlay.is(':visible')) {
+                $tarjeta.css('opacity', 1);
+                $overlay.hide();
+            } else {
+                $tarjeta.css('opacity', 0.5); // Reduce opacity
+                $overlay.show();
+            }
+
+
+            console.log('Botón de ubicación clickeado;')
+        });
+
 
         var getUrlParameter = function getUrlParameter(sParam) {
             var sPageURL = window.location.search.substring(1),
