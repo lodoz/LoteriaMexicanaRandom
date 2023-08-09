@@ -8,8 +8,8 @@
     </div>
     <div class="col-md-4 text-md-end d-flex align-items-center">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Cantidad" aria-label="Example text with two button addons">
-            <button class="btn btn-stop" type="button">Generar</button>
+            <input type="text" class="form-control" placeholder="Cantidad" aria-label="Example text with two button addons" id="cantidad">
+            <button class="btn btn-stop" type="button" onclick="GenerarNuevo()">Generar</button>
         </div>
     </div>
     
@@ -78,7 +78,7 @@
                     {
                         "data": "item1",
                         "render": function (data, type, row, meta) {
-                            return '<a data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-codigo="' + data + '">' + data + '</a>';
+                            return '<a style="word-wrap: break-word;" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-codigo="' + data + '" style="cursor:pointer" href="#">' + data + '</a>';
                         },
                         "width": "10%"
                     },
@@ -114,6 +114,11 @@
                                     </div>`;
                         }, "width": "5%"
                     }
+                ],
+                "columnDefs": [
+                    { "responsivePriority": 1, "targets": 1 },
+                    { "responsivePriority": 2, "targets": 2 },
+                    { "responsivePriority": 3, "targets": 0 }
                 ],
                 "language": espanol
             });
@@ -158,5 +163,11 @@
                 data = 'link';
 
             return data;
-        }</script>
+        }
+
+        function GenerarNuevo() {
+            if ($("#cantidad") != undefined)
+                document.location.href = 'http://loteriamexicanarandom-env.eba-bg67mbkw.us-east-2.elasticbeanstalk.com/?cantidad=' + $("#cantidad").val();
+        }
+    </script>
 }
