@@ -31,7 +31,7 @@ namespace LoteriaMexicanaRandom.Controllers
         public IActionResult Carton()
         {
             return View();
-        }
+        } 
 
         [HttpGet]
         public async Task<IActionResult> GetAll(string cantidad = "500")

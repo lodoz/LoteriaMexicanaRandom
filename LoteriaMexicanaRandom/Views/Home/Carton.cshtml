@@ -13,32 +13,45 @@
     <link href="../css/loteria.css" rel="stylesheet">
 
     <title>Lotería</title>
+    <style>
+        .col {
+            cursor: pointer;
+        }
+        .col:hover {
+            opacity: .5 !important;
+        }
+        .check-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+        .tarjeta {
+            position: relative;
+        }
+        .tarjeta.active img {
+            opacity: .5;
+        }
+        .tarjeta.active:before {
+            content: "";
+            background-image: url("/img/frijol-solo.png");
+            background-size: 80%;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: 99;
+        }
+    </style>
 </head>
-<style>
-    .col{
-        cursor:pointer;
-    }
-    .col:hover{
-        opacity: .5!important;
-    }
-    .check-overlay{
-        position:absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: none;
-        width: 80%;
-        height: 80%;
-        object-fit: contain;
-    }
-    .tarjeta{
-        position: relative;
-    }
-</style>
-<body>
-
-    <div class="pagina d-flex align-items-center">
-
+<body> 
+    <div class="pagina d-flex align-items-center"> 
         <div class="container">
             <div class="row">
                 <div class="col-md-9 mx-auto">
@@ -125,7 +138,9 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script type="text/javascript">$(document).ready(function () {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
             var codigo = getUrlParameter('codigo');
             if (codigo != undefined && codigo.length != 32)
                 return false;
@@ -135,27 +150,21 @@
 
             $('#tarjetas').empty();
             parts.forEach(function (item) {
-                var html = '<div class="col"><div class="tarjeta n' + item + ' border border-2 mb-2 mb-md-3"><img src="https://juegalabolita.com/LoteriaMexicanaWeb/content/img/loteria/ticket-azul.png" alt="Check" class="check-overlay"></div></div>';
+                var html = '<div class="col"><div class="tarjeta border border-2 mb-2 mb-md-3"><img src="/img/375/' + item + '.jpg" alt="Check" class="img-fluid"></div></div>';
                 $('#tarjetas').append(html);
-            })
-
-        });
-
-         
+            }) 
+        }); 
 
         $(document).on("click", ".col", function () {
-            var $tarjeta = $(this);
-            var $overlay = $tarjeta.find('.check-overlay');
+            var $tarjeta = $(this).find(".tarjeta"); 
 
-            if ($overlay.is(':visible')) {
-                $tarjeta.css('opacity', 1);
-                $overlay.hide();
-            } else { 
-                $tarjeta.css('opacity', 0.5); // Reduce opacity
-                $overlay.show();
+            if ($tarjeta.hasClass("active"))
+            { 
+                $tarjeta.removeClass("active"); 
             }
-
-
+            else {
+                $tarjeta.addClass("active");
+            } 
             console.log('Botón de ubicación clickeado;')
         });
 
@@ -173,6 +182,8 @@
                 }
             }
             return false;
-        };</script>
+        };
+
+    </script>
 </body>
 </html>
