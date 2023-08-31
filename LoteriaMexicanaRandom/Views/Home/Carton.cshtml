@@ -45,6 +45,7 @@
             background-position: center;
             z-index: 99;
         }
+
     </style>
 </head>
 <body> 
@@ -57,7 +58,8 @@
                             <img src="../img/logo-loteria.png" alt="Lotería" title="Lotería" class="img-fluid logo-loteria">
                         </div>
                     </div>
-                    <div class="planilla rounded-3 p-3 shadow-lg mb-5">
+                    <div class="planilla rounded-3 p-3 shadow-lg mb-5 position-relative">
+                        <button class="clean" type="button">Limpiar</button>
                         <div class="row row-cols-4 gy-0 gx-2" id="tarjetas">
                             <div class="col">
                                 <div class="tarjeta n01 border border-2 mb-2 mb-md-3">
@@ -161,8 +163,20 @@
             }
             else {
                 $tarjeta.addClass("active");
-            } 
-            console.log('Botón de ubicación clickeado;')
+            }
+            
+            console.log("Click");
+            
+        });
+
+        $(document).on("click", ".clean", function () {
+            var $tarjeta = $(".tarjeta");
+
+            if ($tarjeta.hasClass("active")) {
+                $tarjeta.removeClass("active");
+                console.log("Clean");
+            }
+            
         });
 
         var getUrlParameter = function getUrlParameter(sParam) {

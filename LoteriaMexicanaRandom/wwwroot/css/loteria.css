@@ -35,16 +35,44 @@
     border-radius: .3rem;
 }
 
+.tarjeta img {
+    height: 100%;
+    object-fit:fill;
+}
+
 .modal .tarjeta {
     height: 100px;
 }
-@media (min-width: 390px) {
+
+
+.clean {
+    position: absolute;
+    top: -55px;
+    right: 0px;
+    background: linear-gradient(to bottom, #3366FF, #0000CC);
+    margin-top: 4px;
+    border: 2px solid #FFFFFF;
+    border-radius: 30px;
+    width: 152px;
+    height: 46px;
+    font-size: 18px;
+    color: #FFFFFF;
+    margin-left: -25px;
+}
+
+@media (min-width: 290px) {
     .tarjeta {
         height: 135px;
     }
 
     .modal .tarjeta {
-        height: 120px
+        height: 120px;
+    }
+    .clean {
+        width: 72px;
+        height: 32px;
+        font-size: 14px;
+        top: -38px;
     }
 }
 @media (min-width: 576px) {
@@ -52,13 +80,22 @@
         height: 180px;
     }
     .modal .tarjeta {
-        height: 180px
+        height: 180px;
+    }
+    .clean {
+        width: 112px;
+        height: 42px;
+        top:-50px;
     }
 }
 
 @media (min-width: 768px) {
     .tarjeta {
         height: 180px;
+    }
+    .clean {
+        width: 112px;
+        height: 42px;
     }
 }
 
@@ -67,17 +104,30 @@
         height: 250px;
     }
     .modal .tarjeta {
-        height: 200px
+        height: 200px;
+    }
+    .clean {
+        width: 112px;
+        height: 42px;
     }
 }
 @media (min-width: 1200px) {
     .tarjeta {
         height: 300px;
     }
+    .clean {
+        width: 152px;
+        height: 46px;
+        top: -55px;
+    }
 }
 @media (min-width: 1400px) {
     .tarjeta {
         height: 360px;
+    }
+    .clean {
+        width: 152px;
+        height: 46px;
     }
 }
 .n01 {
